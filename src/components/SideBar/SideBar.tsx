@@ -7,7 +7,7 @@ const SideBar: React.FC<{ data: ProductData }> = ({ data }) => {
     <Box p="0" h="100%" bg="#fff">
       <Image src={data?.image} w="100%" />
       <div className="tags">
-        {data?.tags.map((tag: any) => (
+        {data?.tags?.map((tag: any) => (
           <span className="tag-box" key={tag}>
             {tag}
           </span>

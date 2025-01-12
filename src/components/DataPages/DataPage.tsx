@@ -21,7 +21,7 @@ const DataPage = () => {
     return <div>Loading...</div>;
   }
 
-  const chartData = data?.sales.reduce(
+  const chartData = data?.sales?.reduce(
     (
       acc: Record<string, { retailSales: number; wholesaleSales: number }>,
       sale: Sale
@@ -42,14 +42,15 @@ const DataPage = () => {
     {}
   );
 
-  // Transform the grouped data into an array for the chart
-  const chartDataArray = Object.entries(chartData).map(([month, sales]) => ({
-    date: month,
-    retailSales: sales.retailSales,
-    wholesaleSales: sales.wholesaleSales,
-  }));
+  const chartDataArray = Object.entries(chartData ? chartData : {}).map(
+    ([month, sales]) => ({
+      date: month,
+      retailSales: sales.retailSales,
+      wholesaleSales: sales.wholesaleSales,
+    })
+  );
 
-  const tableRows = data?.sales.slice(0, 12).map((sale: Sale) => (
+  const tableRows = data?.sales?.slice(0, 12).map((sale: Sale) => (
     <Table.Tr key={sale.weekEnding}>
       <Table.Td>{sale.weekEnding}</Table.Td>
       <Table.Td>{sale.retailSales}</Table.Td>
